@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Companie_VoyageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Avion">
+          <Key>
+            <PropertyRef Name="NumAv" />
+          </Key>
+          <Property Name="NumAv" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomAv" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Capacite" Type="int" Nullable="false" />
+          <Property Name="Localisation" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pilote">
+          <Key>
+            <PropertyRef Name="NumPil" />
+          </Key>
+          <Property Name="NumPil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomPil" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="PrenomPil" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Adresse" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salaire" Type="money" Nullable="false" />
+          <Property Name="Prime" Type="money" />
+        </EntityType>
+        <EntityType Name="Vol">
+          <Key>
+            <PropertyRef Name="NumVol" />
+          </Key>
+          <Property Name="NumVol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumPil" Type="int" Nullable="false" />
+          <Property Name="NumAv" Type="int" Nullable="false" />
+          <Property Name="Date_Vol" Type="date" Nullable="false" />
+          <Property Name="Heure_dep" Type="int" Nullable="false" />
+          <Property Name="Heure_arr" Type="int" Nullable="false" />
+          <Property Name="Ville_dep" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Ville_arr" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Vol_Avion">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="1" />
+          <End Role="Vol" Type="Self.Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="NumAv" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="NumAv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Vol_Pilote">
+          <End Role="Pilote" Type="Self.Pilote" Multiplicity="1" />
+          <End Role="Vol" Type="Self.Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pilote">
+              <PropertyRef Name="NumPil" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="NumPil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Companie_VoyageModelStoreContainer">
+          <EntitySet Name="Avion" EntityType="Self.Avion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pilote" EntityType="Self.Pilote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vol" EntityType="Self.Vol" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Vol_Avion" Association="Self.FK_Vol_Avion">
+            <End Role="Avion" EntitySet="Avion" />
+            <End Role="Vol" EntitySet="Vol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Vol_Pilote" Association="Self.fk_Vol_Pilote">
+            <End Role="Pilote" EntitySet="Pilote" />
+            <End Role="Vol" EntitySet="Vol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Companie_VoyageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Avion">
+          <Key>
+            <PropertyRef Name="NumAv" />
+          </Key>
+          <Property Name="NumAv" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomAv" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Capacite" Type="Int32" Nullable="false" />
+          <Property Name="Localisation" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Vols" Relationship="Self.FK_Vol_Avion" FromRole="Avion" ToRole="Vol" />
+        </EntityType>
+        <EntityType Name="Pilote">
+          <Key>
+            <PropertyRef Name="NumPil" />
+          </Key>
+          <Property Name="NumPil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomPil" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PrenomPil" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Salaire" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Prime" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Vols" Relationship="Self.fk_Vol_Pilote" FromRole="Pilote" ToRole="Vol" />
+        </EntityType>
+        <EntityType Name="Vol">
+          <Key>
+            <PropertyRef Name="NumVol" />
+          </Key>
+          <Property Name="NumVol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumPil" Type="Int32" Nullable="false" />
+          <Property Name="NumAv" Type="Int32" Nullable="false" />
+          <Property Name="Date_Vol" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Heure_dep" Type="Int32" Nullable="false" />
+          <Property Name="Heure_arr" Type="Int32" Nullable="false" />
+          <Property Name="Ville_dep" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Ville_arr" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Avion" Relationship="Self.FK_Vol_Avion" FromRole="Vol" ToRole="Avion" />
+          <NavigationProperty Name="Pilote" Relationship="Self.fk_Vol_Pilote" FromRole="Vol" ToRole="Pilote" />
+        </EntityType>
+        <Association Name="FK_Vol_Avion">
+          <End Role="Avion" Type="Self.Avion" Multiplicity="1" />
+          <End Role="Vol" Type="Self.Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avion">
+              <PropertyRef Name="NumAv" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="NumAv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Vol_Pilote">
+          <End Role="Pilote" Type="Self.Pilote" Multiplicity="1" />
+          <End Role="Vol" Type="Self.Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pilote">
+              <PropertyRef Name="NumPil" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="NumPil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Companie_VoyageEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Avions" EntityType="Self.Avion" />
+          <EntitySet Name="Pilotes" EntityType="Self.Pilote" />
+          <EntitySet Name="Vols" EntityType="Self.Vol" />
+          <AssociationSet Name="FK_Vol_Avion" Association="Self.FK_Vol_Avion">
+            <End Role="Avion" EntitySet="Avions" />
+            <End Role="Vol" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Vol_Pilote" Association="Self.fk_Vol_Pilote">
+            <End Role="Pilote" EntitySet="Pilotes" />
+            <End Role="Vol" EntitySet="Vols" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Companie_VoyageModelStoreContainer" CdmEntityContainer="Companie_VoyageEntities1">
+          <EntitySetMapping Name="Avions">
+            <EntityTypeMapping TypeName="Companie_VoyageModel.Avion">
+              <MappingFragment StoreEntitySet="Avion">
+                <ScalarProperty Name="NumAv" ColumnName="NumAv" />
+                <ScalarProperty Name="NomAv" ColumnName="NomAv" />
+                <ScalarProperty Name="Capacite" ColumnName="Capacite" />
+                <ScalarProperty Name="Localisation" ColumnName="Localisation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pilotes">
+            <EntityTypeMapping TypeName="Companie_VoyageModel.Pilote">
+              <MappingFragment StoreEntitySet="Pilote">
+                <ScalarProperty Name="NumPil" ColumnName="NumPil" />
+                <ScalarProperty Name="NomPil" ColumnName="NomPil" />
+                <ScalarProperty Name="PrenomPil" ColumnName="PrenomPil" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Salaire" ColumnName="Salaire" />
+                <ScalarProperty Name="Prime" ColumnName="Prime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vols">
+            <EntityTypeMapping TypeName="Companie_VoyageModel.Vol">
+              <MappingFragment StoreEntitySet="Vol">
+                <ScalarProperty Name="NumVol" ColumnName="NumVol" />
+                <ScalarProperty Name="NumPil" ColumnName="NumPil" />
+                <ScalarProperty Name="NumAv" ColumnName="NumAv" />
+                <ScalarProperty Name="Date_Vol" ColumnName="Date_Vol" />
+                <ScalarProperty Name="Heure_dep" ColumnName="Heure_dep" />
+                <ScalarProperty Name="Heure_arr" ColumnName="Heure_arr" />
+                <ScalarProperty Name="Ville_dep" ColumnName="Ville_dep" />
+                <ScalarProperty Name="Ville_arr" ColumnName="Ville_arr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

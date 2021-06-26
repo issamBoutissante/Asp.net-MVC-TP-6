@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Asp.net_MVC_TP_6.Models.Pilote>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="text-align:center;">Liste Des Pilotes</h2>
+
+<p>
+    @Html.ActionLink("Ajout", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomPil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrenomPil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adresse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salaire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomPil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrenomPil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adresse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salaire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prime)
+        </td>
+        <td>
+            @Html.ActionLink("Modification", "Edit", new { id=item.NumPil }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NumPil }) |
+            @Html.ActionLink("Suprission", "Delete", new { id=item.NumPil })
+        </td>
+    </tr>
+}
+
+</table>

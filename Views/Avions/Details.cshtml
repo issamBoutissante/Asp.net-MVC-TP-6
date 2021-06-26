@@ -1,0 +1,42 @@
+﻿@model Asp.net_MVC_TP_6.Models.Avion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3 style="text-align:center;">Details</h3>
+
+<div>
+    <h4>Avion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomAv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomAv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Localisation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Localisation)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Mofification", "Edit", new { id = Model.NumAv }) |
+    @Html.ActionLink("Retour a la liste", "Index")
+</p>

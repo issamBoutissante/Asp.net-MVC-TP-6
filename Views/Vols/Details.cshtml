@@ -1,0 +1,74 @@
+﻿@model Asp.net_MVC_TP_6.Models.Vol
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3 style="text-align:center;">Details</h3>
+
+<div>
+    <h4>Vol</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Vol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Vol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Heure_dep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Heure_dep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Heure_arr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Heure_arr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ville_dep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ville_dep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ville_arr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ville_arr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avion.NomAv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avion.NomAv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pilote.NomPil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pilote.NomPil)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modification", "Edit", new { id = Model.NumVol }) |
+    @Html.ActionLink("Retour a la liste", "Index")
+</p>

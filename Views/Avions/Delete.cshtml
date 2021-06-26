@@ -1,0 +1,47 @@
+﻿@model Asp.net_MVC_TP_6.Models.Avion
+
+@{
+    ViewBag.Title = "Supprission";
+}
+
+<h3 style="text-align:center;">Supprission</h3>
+
+<p style="color:red;">Ete vous sur de vouloir supprimer cette avion?</p>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomAv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomAv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Localisation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Localisation)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour a la liste", "Index")
+        </div>
+    }
+</div>

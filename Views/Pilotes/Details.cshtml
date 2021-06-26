@@ -1,0 +1,58 @@
+﻿@model Asp.net_MVC_TP_6.Models.Pilote
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3 style="text-align:center;">Details</h3>
+
+<div>
+    <h4>Pilote</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomPil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomPil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrenomPil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrenomPil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adresse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modification", "Edit", new { id = Model.NumPil }) |
+    @Html.ActionLink("Retour a la liste", "Index")
+</p>

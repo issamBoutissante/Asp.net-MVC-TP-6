@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Asp.net_MVC_TP_6.Models.Vol>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="text-align:center;">Liste Des Vols</h2>
+
+<p>
+    @Html.ActionLink("Ajout", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Vol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Heure_dep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Heure_arr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ville_dep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ville_arr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avion.NomAv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pilote.NomPil)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date_Vol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Heure_dep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Heure_arr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville_dep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville_arr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avion.NomAv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pilote.NomPil)
+            </td>
+            <td>
+                @Html.ActionLink("Modification", "Edit", new { id = item.NumVol }) |
+                @Html.ActionLink("Details", "Details", new { id = item.NumVol }) |
+                @Html.ActionLink("Suprission", "Delete", new { id = item.NumVol })
+            </td>
+        </tr>
+    }
+
+</table>
